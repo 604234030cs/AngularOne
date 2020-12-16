@@ -19,6 +19,10 @@ input, textarea {
 :host ::ng-deep .ui-message {
     margin-left: 1em;
 }
+:host ::ng-deep .p-cell-editing {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
 
 @media screen and (max-width: 64em) {
     :host ::ng-deep .ui-message-text {

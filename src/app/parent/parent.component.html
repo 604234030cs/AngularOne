@@ -1,0 +1,131 @@
+
+<!-- <div class="card">
+    <h4>ข้อมูลผู้ปกครอง</h4>
+    <p-table [value]="allParent" dataKey="par_id" editMode="row">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>บัญชีผู้ใช้</th>
+                <th>ชื่อ</th>
+                <th>นามสกุล</th>
+                <th>เบอร์โทร</th>
+                <th>ที่อยู่</th>
+                <th style="width:8rem"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-parent let-editing="editing" let-ri="rowIndex">
+            <tr [pEditableRow]="parent">
+                <td pEditablesColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="parent.par_user">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{parent.par_user}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td pEditablesColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="parent.par_name">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{parent.par_name}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td pEditablesColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="parent.par_sname">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{parent.par_sname}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td pEditablesColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="parent.par_tel">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{parent.par_tel}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td pEditablesColumn>
+                    <p-cellEditor>
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="parent.par_address">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            {{parent.par_address}}
+                        </ng-template>
+                    </p-cellEditor>
+                </td>
+                <td style="text-align:center">
+                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(parent)" class="p-button-rounded p-button-text"></button>
+                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-trash" (click)="onRowDeletSave(parent)" class="p-button-rounded p-button-text p-button-danger"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(parent)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
+                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(parent, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div> -->
+<!-- <h3>ข้อมูลผู้ปกครอง</h3>
+<p-table [value]="products">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>บัญชีผู้ใช้</th>
+            <th>ชื่อ</th>
+            <th>นามสกุล</th>
+            <th>เบอร์โทร</th>
+            <th>ที่อยู่</th>
+            <th style="width:8rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.par_user}}</td>
+            <td>{{product.par_name}}</td>
+            <td>{{product.par_sname}}</td>
+            <td>{{product.par_tel}}</td>
+            <td>{{product.par_address}}</td>
+            <td style="text-align:center">
+                <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
+                <button  pButton pRipple type="button"  icon="pi pi-trash" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text  p-button-danger"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table> -->
+<p-table [value]="products" styleClass="p-datatable-gridlines">
+    <ng-template pTemplate="caption">
+        <h1>ข้อมูลผู้ปกครอง</h1>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th>บัญชีผู้ใช้</th>
+            <th>ชื่อ</th>
+            <th>นามสกุล</th>
+            <th>เบอร์โทร</th>
+            <th>ที่อยู่</th>
+            <th style="width:8rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{product.par_user}}</td>
+            <td>{{product.par_name}}</td>
+            <td>{{product.par_sname}}</td>
+            <td>{{product.par_tel}}</td>
+            <td>{{product.par_address}}</td>
+            <td style="text-align:center">
+                <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
+                <button  pButton pRipple type="button"  icon="pi pi-trash" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text  p-button-danger"></button>
+            </td>
+        </tr>
+    </ng-template>
+
+</p-table>

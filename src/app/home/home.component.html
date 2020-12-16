@@ -7,86 +7,81 @@
 <div class="p-grid">
     <div class="p-col"></div>
     <div class="p-col-1">
-        <button pButton pRipple type="button" icon="pi pi-power-off" class="p-button-rounded p-button-danger p-button-outlined" (click)="logout()"></button>
+        <button pButton pRipple type="button" icon="pi pi-power-off"class="p-button-rounded p-button-danger p-button-outlined" (click)="logout()"></button>
     </div>
-
 </div>
 <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
 <br>
 <p-card>
 
-    <p-toggleButton [(ngModel)]="isEdit" onLabel="แก้ไขข้อมูล" offLabel="ยกเลิกการแก้ไข" onIcon="pi-pi-check" offIcon="pi pi-times" [style]="{'width': '10em'}"></p-toggleButton>
-                <h5>ข้อมูลตนเอง</h5>
-                
-                    <div class="p-grid p-ai-center vertical-container" *ngIf ="isEdit">
-                        <br>
-                        <div class="p-col">
-                            <div class="box"><b>บัญชีผู้ใช้: </b>{{teacher.teacher_user}}</div>
-                        </div>
-                        <div class="p-col">
-                            <div class="box"><b>ชื่อผู้ใช้: </b>{{teacher.teacher_title}}{{teacher.teacher_name}}&nbsp;&nbsp;{{teacher.teacher_sname}}</div>
-                        </div>
-                        <div class="p-col">
-                            <div class="box"><b>เบอร์โทร: </b>{{teacher.teacher_tel}} </div>
-                        </div>
-                    </div>
-                    <div class="p-grid p-flex-column" *ngIf ="isEdit">
-                        <br>
-                        <div class="p-col">
-                            <div class="box"><b>ที่อยู่:</b> {{teacher.teacher_address}}</div>
-                        </div>
+    <p-toggleButton 
+        [(ngModel)]="isEdit" onLabel="แก้ไขข้อมูล" offLabel="ยกเลิกการแก้ไข" onIcon="pi-pi-check"offIcon="pi pi-times" [style]="{'width': '10em'}">
+    </p-toggleButton>
+    <h3>ข้อมูลตนเอง</h3>
+    <div class="p-grid p-flex-column" *ngIf="isEdit">
+        <br>
+        <div class="p-col">
+            <div class="box"><b>บัญชีผู้ใช้</b>{{teacher.teacher_user}}</div>
+        </div>
+    </div>    
+    <div class="p-grid p-ai-center vertical-container" *ngIf="isEdit">
+        <br>
+        <div class="p-col">
+            <br>
+            <div class="box"><b>ชื่อผู้ใช้:
+                </b>{{teacher.teacher_title}}{{teacher.teacher_name}}&nbsp;&nbsp;{{teacher.teacher_sname}}
+            </div>
+        </div>
+        <div class="p-col">
+            <div class="box"><b>เบอร์โทร: </b>{{teacher.teacher_tel}} </div>
+        </div>
+    </div>
+    <div class="p-grid p-flex-column" *ngIf="isEdit">
+        <br>
+        <div class="p-col">
+            <div class="box"><b>ที่อยู่:</b> {{teacher.teacher_address}}</div>
+        </div>
+    </div>
+    <div class="p-grid p-ai-center vertical-container" *ngIf="!isEdit">
+        <div class="p-col">
+            <p-dropdown
+                 [options]="title" [(ngModel)]="teacher.teacher_title" placeholder="{{teacher.teacher_title}}">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="p-grid p-fluid" *ngIf="!isEdit">
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <input type="text" pInputText placeholder="{{teacher.teacher_name}}" [(ngModel)]="teacher.teacher_name">
+            </div>
+        </div>
 
-                    </div>
-                    <div class="p-grid p-ai-center vertical-container" *ngIf ="!isEdit">
-                        <div class="p-col">
-                            <p-dropdown 
-                                [options]="title" [(ngModel)]="teacher_title" placeholder="{{teacher_title}}" optionLabel="name">
-                            </p-dropdown>
-                        </div>
-                    </div>
-                    <div class="p-grid p-fluid" *ngIf ="!isEdit">
-                        <div class="p-col-12 p-md-4">
-                            <div class="p-inputgroup">
-                                <!-- <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span> -->
-                                <input type="text" pInputText placeholder="Username"[(ngModel)]="teacher.teacher_name">         
-                            </div>
-                        </div>
-                        
-                        <div class="p-col-12 p-md-4">
-                            <div class="p-inputgroup">
-                                <!-- <span class="p-inputgroup-addon">$</span> -->
-                                <input type="text" pInputText placeholder="Price"[(ngModel)]="teacher.teacher_sname">   
-                                <!-- <span class="p-inputgroup-addon">.00</span>       -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-grid p-ai-center vertical-container" *ngIf ="!isEdit">
-                        <div class="p-col">
-                            <input id="disabled-input" type="text" pInputText  [(ngModel)]="teacher.teacher_tel" />
-                        </div>
-                    </div>
-                    <div class="p-grid p-flex-column" *ngIf ="!isEdit">
-                        <div class="p-col">
-                            <div class="p-inputgroup">
-                                <!-- <span class="p-inputgroup-addon"><i  style="line-height: 1.25;"></i></span>   -->
-                                <!-- <span class="p-inputgroup-addon"><i  style="line-height: 1.25;"></i></span>    -->
-                                <input type="text" pInputText placeholder="" [(ngModel)]="teacher.teacher_address"> 
-                                <!-- <span class="p-inputgroup-addon">$</span>   -->
-                                <!-- <span class="p-inputgroup-addon">.00</span>       -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-grid p-fluid" *ngIf="!isEdit">
-                        
-                        <div class="p-col-12 p-md-4">
-                        </div>                
-                        <div class="p-col-12 p-md-4" >
-                            <button pButton pRipple type="button" label="Success" class="p-button-raised p-button-success" (click)="confirmEdit()"></button>
-                        </div>                               
-                        <div class="p-col-12 p-md-4">
-                        </div>
-                    </div>
-                    
+        <div class="p-col-12 p-md-4">
+            <div class="p-inputgroup">
+                <input type="text" pInputText placeholder="{{teacher.teacher_sname}}"[(ngModel)]="teacher.teacher_sname">
+            </div>
+        </div>
+    </div>
+    <div class="p-grid p-ai-center vertical-container" *ngIf="!isEdit">
+        <div class="p-col">
+            <input id="disabled-input" type="text" pInputText="{{teacher.teacher_tel}}"
+                [(ngModel)]="teacher.teacher_tel" />
+        </div>
+    </div>
+    <div class="p-grid p-flex-column" *ngIf="!isEdit">
+        <div class="p-col">
+            <div class="p-inputgroup">
+                <input type="text" pInputText placeholder="{{teacher.teacher_address}}"[(ngModel)]="teacher.teacher_address">
+            </div>
+        </div>
+    </div>
+    <div class="p-grid p-fluid" *ngIf="!isEdit">
 
+        <div class="p-col-12 p-md-4"></div>
+        <div class="p-col-12 p-md-4">
+            <button pButton pRipple type="button" label="ยืนยันการแก้ไข" class="p-button-raised p-button-success"(click)="confirmEdit()"></button>
+        </div>
+        <div class="p-col-12 p-md-4"></div>
+    </div>
 
 </p-card>

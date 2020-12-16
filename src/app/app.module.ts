@@ -19,9 +19,15 @@ import {TabMenuModule} from 'primeng-lts/tabmenu';
 import {ToggleButtonModule} from 'primeng-lts/togglebutton';
 import {DropdownModule} from 'primeng-lts/dropdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
-
+import { ParentComponent } from './parent/parent.component';
+import {TableModule} from 'primeng-lts/table';
+import {ToastModule} from 'primeng-lts/toast';
+import {CalendarModule} from 'primeng-lts/calendar';
+import {SliderModule} from 'primeng-lts/slider';
+import {MultiSelectModule} from 'primeng-lts/multiselect';
+import {DialogModule} from 'primeng-lts/dialog';
+import {ProgressBarModule} from 'primeng-lts/progressbar';
+import { EditparentComponent } from './editparent/editparent.component';
 
 
 
@@ -31,7 +37,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    ParentComponent,
+    EditparentComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +57,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TabMenuModule,
     ToggleButtonModule,
     DropdownModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    TableModule,
+    ToastModule,
+    SliderModule,
+    CalendarModule,
+    DialogModule,
+    ProgressBarModule,
+    MultiSelectModule
 
     
 

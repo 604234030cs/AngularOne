@@ -1,1 +1,65 @@
-<p>register works!</p>
+<p-card>
+    <form [formGroup]="UserForm" (ngSubmit)="ConfirmRegister(UserForm.value)" >
+        <h2>สมัครสมชิก</h2>
+        <div class="p-grid p-flex-column" >
+            <div class="p-col">
+                <div class="p-inputgroup">
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="teacher_user">
+                        <label for="inputtext">บัญชีผู้ใช้</label>  
+                    </span>
+                </div>
+            </div>
+            <div class="p-col">
+                <div class="p-inputgroup">
+                    <span class="p-float-label">
+                        <input type="password" pInputText formControlName="teacher_password">
+                        <label for="inputtext">รหัสผ่าน</label>  
+                    </span>
+                </div>
+            </div>
+            <div class="p-grid p-ai-center vertical-container" >
+                <div class="p-col">
+                   &nbsp; <p-dropdown [options]="title" formControlName="teacher_title" ></p-dropdown>
+                </div>
+            </div>
+            <div class="p-col">
+                <div class="p-inputgroup">
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="teacher_name">
+                        <label for="inputtext">ชื่อผู้ใช้</label>  
+                    </span>
+                </div>
+            </div>
+            <div class="p-col">
+                <div class="p-inputgroup">
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="teacher_sname">
+                        <label for="inputtext">นามสกุล</label>  
+                    </span>
+                </div>
+            </div>
+            <div class="p-col">
+                <div class="p-inputgroup">
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="teacher_address">
+                        <label for="inputtext">ที่อยู่</label>  
+                    </span>
+                </div>
+            </div>
+            <div class="p-col">
+                <div class="p-inputgroup">
+                    <span class="p-float-label">
+                        <input type="text" pInputText formControlName="teacher_tel">
+                        <label for="inputtext">เบอร์โทร</label>  
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="p-col-12 p-md-6">
+            <button pButton pRipple type="submit" label="ยืนยันการสมัคร"[disabled]="!UserForm.valid"  class="p-button-raised p-button-success"
+                ></button>
+        </div>
+
+    </form>
+</p-card>

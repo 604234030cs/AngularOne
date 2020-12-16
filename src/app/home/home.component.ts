@@ -1,9 +1,9 @@
 import { Router } from '@angular/router';
 import { ApiService } from './../api.service';
 import { Component, OnInit } from '@angular/core';
-import {MenuItem} from 'primeng-lts/api';
-import {SelectItem} from 'primeng-lts/api';
-import { environment } from 'src/environments/environment';
+import { MenuItem } from 'primeng-lts/api';
+import { SelectItem } from 'primeng-lts/api';
+
 
 
 
@@ -22,34 +22,39 @@ export class HomeComponent implements OnInit {
   Items: SelectItem[];
   items: MenuItem[];
   activeItem: MenuItem;
-  teacher:any=[];
-
-  
-  isEdit: boolean ;
+  teacher: any = [];
 
 
-  constructor( private api:ApiService,private router:Router) { 
+  isEdit: boolean;
+
+
+  constructor(private api: ApiService, private router: Router) {
     this.isEdit = true
     this.Items = [];
+    this.loaddata();
+    // this.api.getdate().subscribe((data: any) => {
+    //   this.listdate = data;
+    //   console.log(this.listdate);
 
-    this.api.getdate().subscribe((data:any)=>{
-      this.listdate = data;
-      console.log(this.listdate);
-      
-    })
+    // })
+
+    this.title = [
+      { label: 'นางสาว', value: 'นางสาว' },
+      { label: 'นาง', value: 'นาง' },
+      { label: 'นาย', value: 'นาย' }
+    ];
+
+  }
+
+
+  loaddata(){
     let teacher = JSON.parse(localStorage.getItem('user'));
     console.log(teacher);
-    this.api.getteacher(teacher.teacher_user,teacher.teacher_password).subscribe((dataTeacher:any)=>{
+    this.api.getteacher(teacher.teacher_user, teacher.teacher_password).subscribe((dataTeacher: any) => {
       console.log(dataTeacher);
       this.teacher = dataTeacher;
-      
+
     })
-    this.title = [
-      {name: 'นางสาว'},
-      {name: 'นาง'},
-      {name: 'นาย'}
-  ];
-    
   }
 
   ngOnInit(): void {
@@ -57,27 +62,39 @@ export class HomeComponent implements OnInit {
     this.list = this.api.getlist();
 
     this.items = [
-      {label: '', icon: 'pi pi-fw pi-home'},
-      {label: 'ข้อมูลผู้ปกครอง', icon: 'pi pi-fw pi-user'},
-      {label: 'ข้อมูลชั้นเรียน', icon: 'pi pi-fw pi-file'},
-      {label: 'ประวัติการเช็ค', icon: 'pi pi-fw pi-file'}
-      
-  ];
-  this.activeItem = this.items[0];
+      { label: '', icon: 'pi pi-fw pi-home' },
+      { label: 'ข้อมูลผู้ปกครอง', icon: 'pi pi-fw pi-user',routerLink:"/parent" },
+      { label: 'ข้อมูลชั้นเรียน', icon: 'pi pi-fw pi-file' },
+      { label: 'ประวัติการเช็ค', icon: 'pi pi-fw pi-file' }
+
+    ];
+    this.activeItem = this.items[0];
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('user')
     this.router.navigate(['/'])
   }
 
-  confirmEdit(){
-    environment
-    // let url = environment.URL +'/public/index.php/editteacher/'+this.teacher.teacher_id+'&&'+this.teacher.teacher_title+'&&'+this.teacher.teacher_name
+  confirmEdit() {
+
+    let Teacher_Title = this.teacher.teacher_title;
+    console.log(Teacher_Title);
+
+    this.api.UpdateDataTeacher(this.teacher.teacher_id, Teacher_Title, this.teacher.teacher_name, this.teacher.teacher_sname,
+      this.teacher.teacher_address, this.teacher.teacher_tel).subscribe((DataUpdateTeacher: any) => {
+        this.teacher = DataUpdateTeacher;
+        this.isEdit = true;
+        this.loaddata();
+      })
+      
+
+    // let url = environment.Url +'/editteacher'+this.teacher.teacher_id+'&&'+this.teacher.teacher_title+'&&'+this.teacher.teacher_name
     // +'&&'+this.teacher.teacher_sname+'&&'+this.teacher.teacher_address+'&&'+this.teacher.teacher_tel;
+
   }
-  
-  
-  
+
+
+
 
 }
