@@ -1,108 +1,16 @@
-
-<!-- <div class="card">
-    <h4>ข้อมูลผู้ปกครอง</h4>
-    <p-table [value]="allParent" dataKey="par_id" editMode="row">
-        <ng-template pTemplate="header">
-            <tr>
-                <th>บัญชีผู้ใช้</th>
-                <th>ชื่อ</th>
-                <th>นามสกุล</th>
-                <th>เบอร์โทร</th>
-                <th>ที่อยู่</th>
-                <th style="width:8rem"></th>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-parent let-editing="editing" let-ri="rowIndex">
-            <tr [pEditableRow]="parent">
-                <td pEditablesColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="parent.par_user">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{parent.par_user}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td pEditablesColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="parent.par_name">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{parent.par_name}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td pEditablesColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="parent.par_sname">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{parent.par_sname}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td pEditablesColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="parent.par_tel">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{parent.par_tel}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td pEditablesColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input pInputText type="text" [(ngModel)]="parent.par_address">
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{parent.par_address}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td style="text-align:center">
-                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-pencil" (click)="onRowEditInit(parent)" class="p-button-rounded p-button-text"></button>
-                    <button *ngIf="!editing" pButton pRipple type="button" pInitEditableRow icon="pi pi-trash" (click)="onRowDeletSave(parent)" class="p-button-rounded p-button-text p-button-danger"></button>
-                    <button *ngIf="editing" pButton pRipple type="button" pSaveEditableRow icon="pi pi-check" (click)="onRowEditSave(parent)" class="p-button-rounded p-button-text p-button-success p-mr-2"></button>
-                    <button *ngIf="editing" pButton pRipple type="button" pCancelEditableRow icon="pi pi-times" (click)="onRowEditCancel(parent, ri)" class="p-button-rounded p-button-text p-button-danger"></button>
-                </td>
-            </tr>
-        </ng-template>
-    </p-table>
-</div> -->
-<!-- <h3>ข้อมูลผู้ปกครอง</h3>
-<p-table [value]="products">
-    <ng-template pTemplate="header">
-        <tr>
-            <th>บัญชีผู้ใช้</th>
-            <th>ชื่อ</th>
-            <th>นามสกุล</th>
-            <th>เบอร์โทร</th>
-            <th>ที่อยู่</th>
-            <th style="width:8rem"></th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-product>
-        <tr>
-            <td>{{product.par_user}}</td>
-            <td>{{product.par_name}}</td>
-            <td>{{product.par_sname}}</td>
-            <td>{{product.par_tel}}</td>
-            <td>{{product.par_address}}</td>
-            <td style="text-align:center">
-                <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
-                <button  pButton pRipple type="button"  icon="pi pi-trash" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text  p-button-danger"></button>
-            </td>
-        </tr>
-    </ng-template>
-</p-table> -->
-<p-table [value]="products" styleClass="p-datatable-gridlines">
+<p-toast></p-toast>
+<div class="p-grid">
+    <div class="p-col"></div>
+    <div class="p-col-1">
+        <button pButton pRipple type="button" icon="pi pi-home"class="p-button-rounded p-button-success p-button-outlined" (click)="goHome()" ></button>
+    </div>
+</div>
+<p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
+<br>
+<p-card>
+<p-table [value]="products" styleClass="p-datatable-striped">
     <ng-template pTemplate="caption">
-        <h1>ข้อมูลผู้ปกครอง</h1>
+        <h1>ตารางข้อมูลผู้ปกครอง</h1>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
@@ -111,21 +19,66 @@
             <th>นามสกุล</th>
             <th>เบอร์โทร</th>
             <th>ที่อยู่</th>
-            <th style="width:8rem"></th>
+            <th style="text-align:center">แก้ไข</th>
+            <th style="text-align:center">ลบ</th>
+           
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
         <tr>
             <td>{{product.par_user}}</td>
-            <td>{{product.par_name}}</td>
+            <td>{{product.par_title}}{{product.par_name}}</td>
             <td>{{product.par_sname}}</td>
             <td>{{product.par_tel}}</td>
             <td>{{product.par_address}}</td>
             <td style="text-align:center">
-                <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
-                <button  pButton pRipple type="button"  icon="pi pi-trash" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text  p-button-danger"></button>
+                <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button> 
+            </td>
+            <td style="text-align:center">
+                <button  pButton pRipple type="button"  icon="pi pi-trash" (click)="saveDeleteParent(product)" class="p-button-rounded p-button-text  p-button-danger"></button>
             </td>
         </tr>
     </ng-template>
 
 </p-table>
+</p-card>
+
+<p-dialog  [(visible)]="parentDialog"[style]="{width: '450px'}" header="ข้อมูลผู้ปกครอง" [modal]="true"styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <div class="p-grid p-ai-center vertical-container">
+            <div class="p-col">
+                <label for="name">คำนำหน้า</label>
+                <p-dropdown
+                     [options]="title" [(ngModel)]="checkParent[0].par_title" placeholder="{{checkParent[0].par_title}}">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-field">
+            <label for="name">ชื่อผู้ใช้</label>
+            <input type="text" pInputText placeholder="{{checkParent[0].par_name}}" [(ngModel)]="checkParent[0].par_name"  required autofocus>
+			<!-- <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="p-field">
+            <label for="name">นามสกุล</label>
+            <input type="text" pInputText placeholder="{{checkParent[0].par_sname}}" [(ngModel)]="checkParent[0].par_sname"  required autofocus>
+			<!-- <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="p-field">
+            <label for="name">เบอร์โทร</label>
+            <input type="text" pInputText placeholder="{{checkParent[0].par_tel}}" [(ngModel)]="checkParent[0].par_tel"  required autofocus>
+			<!-- <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+        <div class="p-field">
+            <label for="name">ที่อยู่</label>
+            <input type="text" pInputText placeholder="{{checkParent[0].par_address}}" [(ngModel)]="checkParent[0].par_address"  required autofocus>
+			<!-- <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
+        </div>
+    </ng-template>
+    
+    <ng-template pTemplate="footer">
+		<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+		<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="saveEditParent()"></button>
+	</ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

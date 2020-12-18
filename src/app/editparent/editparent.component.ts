@@ -19,5 +19,8 @@ export class EditparentComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  loadDataParent(){
+    
+  }
 
 }

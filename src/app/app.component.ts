@@ -34,7 +34,7 @@ import * as _ from "lodash"
 export class AppComponent  implements OnInit{
   title = 'pjone';
   currentPath: string = ''
-  hideMenu: any = ['/login','/home','/parent','/editparent']
+  hideMenu: any = ['/login','/home','/parent','/editparent','class','namecheckinghistory']
   
   animals = ['Ant', 'Bat', 'Cat', 'Dog']
 
@@ -42,7 +42,7 @@ export class AppComponent  implements OnInit{
   constructor(private router:Router){
     
     this.animals.forEach((animal) => {
-        console.log(animal)
+        // console.log(animal)
      });
 
 

@@ -15,11 +15,7 @@ export class ApiService {
       {"id": 2, "name": "rosdee","age":32}
     ]
   }
-
-  getdate(){
-    let url = environment.Url+'/checkstudentname2/2020-12-13';
-    return this.http.get(url);
-  }
+  
   RegisterTeacher(datapost){
     
     let url = environment.Url+'/register';

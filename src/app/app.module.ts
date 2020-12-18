@@ -1,3 +1,5 @@
+import { ClassService } from './class.service';
+import { ParentService } from './parent.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { LoginComponent } from './login/login.component';
@@ -27,8 +29,19 @@ import {SliderModule} from 'primeng-lts/slider';
 import {MultiSelectModule} from 'primeng-lts/multiselect';
 import {DialogModule} from 'primeng-lts/dialog';
 import {ProgressBarModule} from 'primeng-lts/progressbar';
-import { EditparentComponent } from './editparent/editparent.component';
+import {EditparentComponent } from './editparent/editparent.component';
+import {FileUploadModule} from 'primeng-lts/fileupload';
+import {ToolbarModule} from 'primeng-lts/toolbar';
+import {RatingModule} from 'primeng-lts/rating';
+import {RadioButtonModule} from 'primeng-lts/radiobutton';
+import {InputNumberModule} from 'primeng-lts/inputnumber';
+import {ConfirmDialogModule } from 'primeng-lts/confirmdialog';
+import {ConfirmationService} from 'primeng-lts/api';
+import {MessageService } from 'primeng-lts/api';
+import { ClassComponent } from './class/class.component';
+import { NamecheckinghistoryComponent } from './namecheckinghistory/namecheckinghistory.component';
 
+// import { MessageService } from 'primeng-lts/api';
 
 
 
@@ -39,7 +52,9 @@ import { EditparentComponent } from './editparent/editparent.component';
     RegisterComponent,
     LoginComponent,
     ParentComponent,
-    EditparentComponent
+    EditparentComponent,
+    ClassComponent,
+    NamecheckinghistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -64,13 +79,23 @@ import { EditparentComponent } from './editparent/editparent.component';
     CalendarModule,
     DialogModule,
     ProgressBarModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ToolbarModule,
+    RatingModule,
+    FileUploadModule,
+    RadioButtonModule,
+    InputNumberModule,
+    ConfirmDialogModule
+    
+
+    // MessageService
+    
 
     
 
     
   ],
-  providers: [ApiService],
+  providers: [ApiService, MessageService, ConfirmationService,ParentService,ClassService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

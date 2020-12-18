@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit {
   activeItem: MenuItem;
   teacher: any = [];
 
-
   isEdit: boolean;
 
 
@@ -32,11 +31,6 @@ export class HomeComponent implements OnInit {
     this.isEdit = true
     this.Items = [];
     this.loaddata();
-    // this.api.getdate().subscribe((data: any) => {
-    //   this.listdate = data;
-    //   console.log(this.listdate);
-
-    // })
 
     this.title = [
       { label: 'นางสาว', value: 'นางสาว' },
@@ -64,8 +58,8 @@ export class HomeComponent implements OnInit {
     this.items = [
       { label: '', icon: 'pi pi-fw pi-home' },
       { label: 'ข้อมูลผู้ปกครอง', icon: 'pi pi-fw pi-user',routerLink:"/parent" },
-      { label: 'ข้อมูลชั้นเรียน', icon: 'pi pi-fw pi-file' },
-      { label: 'ประวัติการเช็ค', icon: 'pi pi-fw pi-file' }
+      { label: 'ข้อมูลชั้นเรียน', icon: 'pi pi-fw pi-file',routerLink:"/class" },
+      { label: 'ประวัติการเช็ค', icon: 'pi pi-fw pi-file',routerLink:"/namecheckinghistory" }
 
     ];
     this.activeItem = this.items[0];
@@ -85,10 +79,7 @@ export class HomeComponent implements OnInit {
       this.teacher.teacher_address, this.teacher.teacher_tel).subscribe((DataUpdateTeacher: any) => {
         this.teacher = DataUpdateTeacher;
         this.isEdit = true;
-        this.loaddata();
       })
-      
-
     // let url = environment.Url +'/editteacher'+this.teacher.teacher_id+'&&'+this.teacher.teacher_title+'&&'+this.teacher.teacher_name
     // +'&&'+this.teacher.teacher_sname+'&&'+this.teacher.teacher_address+'&&'+this.teacher.teacher_tel;
 
