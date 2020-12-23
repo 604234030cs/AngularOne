@@ -1,16 +1,10 @@
 <p-toast></p-toast>
-<div class="p-grid">
-    <div class="p-col"></div>
-    <div class="p-col-1">
-        <button pButton pRipple type="button" icon="pi pi-home"class="p-button-rounded p-button-success p-button-outlined" (click)="goHome()" ></button>
-    </div>
-</div>
 <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
 <br>
 <p-card>
-<p-table [value]="products" styleClass="p-datatable-striped">
+<p-table [value]="allParentTotal"  styleClass="p-datatable-striped">
     <ng-template pTemplate="caption">
-        <h1>ตารางข้อมูลผู้ปกครอง</h1>
+        <h3>ตารางข้อมูลผู้ปกครอง</h3>
     </ng-template>
     <ng-template pTemplate="header">
         <tr>
@@ -19,27 +13,25 @@
             <th>นามสกุล</th>
             <th>เบอร์โทร</th>
             <th>ที่อยู่</th>
-            <th style="text-align:center">แก้ไข</th>
-            <th style="text-align:center">ลบ</th>
-           
+            <th style="text-align:center"></th>
+            <th style="text-align:center">สถานะ</th>
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
-        <tr>
-            <td>{{product.par_user}}</td>
-            <td>{{product.par_title}}{{product.par_name}}</td>
-            <td>{{product.par_sname}}</td>
-            <td>{{product.par_tel}}</td>
-            <td>{{product.par_address}}</td>
+        <tr [pSelectableRow]="product" >
+            <td>{{product.parentUser}}</td>
+            <td>{{product.parentTitle}}{{product.parentName}}</td>
+            <td>{{product.parentSname}}</td>
+            <td>{{product.parentTel}}</td>
+            <td>{{product.parentAddress}}</td>
             <td style="text-align:center">
-                <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button> 
             </td>
             <td style="text-align:center">
+                <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(product)" class="p-button-rounded p-button-text"></button>
                 <button  pButton pRipple type="button"  icon="pi pi-trash" (click)="saveDeleteParent(product)" class="p-button-rounded p-button-text  p-button-danger"></button>
             </td>
         </tr>
     </ng-template>
-
 </p-table>
 </p-card>
 
@@ -49,29 +41,26 @@
             <div class="p-col">
                 <label for="name">คำนำหน้า</label>
                 <p-dropdown
-                     [options]="title" [(ngModel)]="checkParent[0].par_title" placeholder="{{checkParent[0].par_title}}">
+                     [options]="title" [(ngModel)]="checkParent.parentTitle" placeholder="{{checkParent.parentTitle}}">
                 </p-dropdown>
             </div>
         </div>
         <div class="p-field">
             <label for="name">ชื่อผู้ใช้</label>
-            <input type="text" pInputText placeholder="{{checkParent[0].par_name}}" [(ngModel)]="checkParent[0].par_name"  required autofocus>
+            <input type="text" pInputText placeholder="{{checkParent.parentName}}" [(ngModel)]="checkParent.parentName"  required autofocus>
 			<!-- <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
         </div>
         <div class="p-field">
             <label for="name">นามสกุล</label>
-            <input type="text" pInputText placeholder="{{checkParent[0].par_sname}}" [(ngModel)]="checkParent[0].par_sname"  required autofocus>
-			<!-- <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
+            <input type="text" pInputText placeholder="{{checkParent.parentSname}}" [(ngModel)]="checkParent.parentSname"  required autofocus>
         </div>
         <div class="p-field">
             <label for="name">เบอร์โทร</label>
-            <input type="text" pInputText placeholder="{{checkParent[0].par_tel}}" [(ngModel)]="checkParent[0].par_tel"  required autofocus>
-			<!-- <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
+            <input type="text" pInputText placeholder="{{checkParent.parentTel}}" [(ngModel)]="checkParent.parentTel"  required autofocus>
         </div>
         <div class="p-field">
             <label for="name">ที่อยู่</label>
-            <input type="text" pInputText placeholder="{{checkParent[0].par_address}}" [(ngModel)]="checkParent[0].par_address"  required autofocus>
-			<!-- <small class="p-invalid" *ngIf="submitted && !product.name">Name is required.</small> -->
+            <input type="text" pInputText placeholder="{{checkParent.parentAddress}}" [(ngModel)]="checkParent.parentAddress"  required autofocus>
         </div>
     </ng-template>
     
@@ -82,3 +71,4 @@
 </p-dialog>
 
 <p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>
+

@@ -24,22 +24,24 @@ import { MessageService } from "primeng-lts/api";
 export class ParentComponent implements OnInit {
 
   title: any=[];
-  products: any=[];
+  allParentTotal: any=[];
   product: any=[];
   allParent:any=[];
   checkParent:any=[];
-
+  selectedProduct: any;
+  selectedProducts2:any;
+  clonedProducts: { [s: string]: any; } = {};
   statuses: SelectItem[];
   items: MenuItem[];
   activeItem: MenuItem;
-
   parentDialog: boolean;
   submitted: boolean;
-  
-  clonedProducts: { [s: string]: any; } = {};
+
+
+
   constructor(private apiParent: ParentService,private router: Router,private messageService: MessageService,private confirmationService: ConfirmationService) {
 
-      this.loadDataParent();
+
       this.loadDataParent2();
       this.title = [
         { label: 'นางสาว', value: 'นางสาว' },
@@ -62,73 +64,73 @@ export class ParentComponent implements OnInit {
     
   }
 
-  loadDataParent(){
-    
-    let dataTeacher = JSON.parse(localStorage.getItem('user'))
-    this.apiParent.getDataParent(dataTeacher.teacher_id).subscribe(data => {
-      this.allParent = data;
-      console.log(this.allParent);
-      
- 
-    });
- 
-  }
-
   loadDataParent2(){
   
     let dataTeacher = JSON.parse(localStorage.getItem('user'))
-    this.apiParent.getDataParent(dataTeacher.teacher_id).subscribe(data => {
-      this.products = data;
- 
-    });
+    this.apiParent.getDataParent(dataTeacher.teacherId).subscribe((data:any)=>{
+      this.allParentTotal = data.map(it=>{
+          return {
+            parentLatitude:it.latitude,parentLongtitude:it.longitude,parentAddress:it.par_address,
+            parentId:it.par_id,parentName:it.par_name,parentSname:it.par_sname,parentPassword:it.par_password,
+            parentTel:it.par_tel,parentTitle:it.par_title,parentUser:it.par_user,teacherId:it.teacher_id
+          }
+      })
+    })
   }
 
   onRowEditInit(parent: any) {
 
-    let id = parent.par_id;
+    let id = parent.parentId;
     this.apiParent.getCheckDataParent(id).subscribe((datacheckparent:any)=>{
-      this.checkParent = datacheckparent;
+      this.checkParent = {
+        parentLatitude:datacheckparent[0].latitude,parentLongtitude:datacheckparent[0].longitude,parentAddress:datacheckparent[0].par_address,
+        parentId:datacheckparent[0].par_id,parentName:datacheckparent[0].par_name,parentSname:datacheckparent[0].par_sname,parentPassword:datacheckparent[0].par_password,
+        parentTel:datacheckparent[0].par_tel,parentTitle:datacheckparent[0].par_title,parentUser:datacheckparent[0].par_user,teacherId:datacheckparent[0].teacher_id
+      }
       this.parentDialog = true;
     })
-    // this.router.navigate(['/editparent',id]);
   }
 
   saveEditParent(){
 
     this.apiParent.editDataParent(this.checkParent).subscribe((dataEditingParent:any)=>{
       console.log(dataEditingParent);
+      if(dataEditingParent == 'Success'){
+        this.messageService.add({severity:'success', summary: 'เสร็จสิ้น', detail: 'แก้ไขข้อมูลผู้ปกครองสำเร็จ', life: 3000});
+      }else{
+        this.messageService.add({severity:'danger', summary: 'เสร็จสิ้น', detail: 'แก้ไขข้อมูลผู้ปกครองไม่สำเร็จ', life: 3000});
+      }
       this.parentDialog = false;
       this.loadDataParent2();
-      
     })  
 
       
   }
   saveDeleteParent(parent:any){
-    let id = parent.par_id;
-    console.log(id);
+    let id = parent.parentId;
     this.apiParent.getCheckDataParent(id).subscribe((datacheckparent:any)=>{
-      this.checkParent = datacheckparent;
-      console.log(this.checkParent);
-
+      this.checkParent = {
+        parentLatitude:datacheckparent[0].latitude,parentLongtitude:datacheckparent[0].longitude,parentAddress:datacheckparent[0].par_address,
+        parentId:datacheckparent[0].par_id,parentName:datacheckparent[0].par_name,parentSname:datacheckparent[0].par_sname,parentPassword:datacheckparent[0].par_password,
+        parentTel:datacheckparent[0].par_tel,parentTitle:datacheckparent[0].par_title,parentUser:datacheckparent[0].par_user,teacherId:datacheckparent[0].teacher_id
+      }
       this.confirmationService.confirm({
-        message: 'คุณต้องการลบผู้ปกครอง ' + this.checkParent[0].par_title+this.checkParent[0].par_name  +'  '+ this.checkParent[0].par_sname + '?',
+        message: 'คุณต้องการลบผู้ปกครอง ' + this.checkParent.parentId+this.checkParent.parentName  +'  '+ this.checkParent.Sname + '?',
         header: 'ยืนยัน',
         icon: 'pi pi-exclamation-triangle',
         accept: ()=>{
-          console.log(this.checkParent[0].par_id);
+          console.log(this.checkParent.parentId);
           
-          this.apiParent.getDeleteDataParent(this.checkParent[0].par_id).subscribe((dataDeleteParent)=>{
+          this.apiParent.getDeleteDataParent(this.checkParent.parentId).subscribe((dataDeleteParent)=>{
             if(dataDeleteParent == 'Success' ){
               console.log("สำเร็จ");
               this.messageService.add({severity:'success', summary: 'เสร็จสิ้น', detail: 'ลบข้อมูลผู้ปกครองสำเร็จ', life: 3000});
+              this.loadDataParent2();
             }else{
               console.log("ไม่สำเร็จ");
-              this.messageService.add({severity:'success', summary: 'เสร็จสิ้น', detail: 'ลบข้อมูลผู้ปกครองไม่สำเร็จ', life: 3000});
+              this.messageService.add({severity:'danger', summary: 'เสร็จสิ้น', detail: 'ลบข้อมูลผู้ปกครองไม่สำเร็จ', life: 3000});
             }
-           
           })
-
         }
     })
     })
@@ -136,28 +138,12 @@ export class ParentComponent implements OnInit {
   }
   
   hideDialog(){
-
   this.parentDialog = false;  
   }
 
   goHome(){
   this.router.navigate(['/home']);
   }
-
-// onRowEditSave(parent: any) {
-
-//       this.router.navigate(['/editparent']);
-// }
-
-// onRowEditCancel(parent: any, index: number) {
-//   this.allParent[index] = this.clonedProducts[parent.par_id];
-//   delete this.allParent[parent.par_id];
-// }
-// onRowDeletSave(parent){
-//   let id = parent.par_id;
-//   console.log(parent.par_address);
-  
-// }
 
 
   

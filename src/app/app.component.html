@@ -1,31 +1,24 @@
-
-
 <ng-container *ngIf="isHideMenu">
   <p-card>
     <div class="p-grid">
-        <div class="p-col"></div>
-        <div class="p-col"></div>
-        <div class="p-col"></div>
-        <div class="p-col-3">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/1.png" >
-          <h2>มหาวิทยาลัยราชภัฏสงขลา</h2>
-          <h2>SongKhla Rajabhat University</h2>
-        </div>
-        <div class="p-col"></div>
-        <div class="p-col"></div>
-        <div class="p-col"></div>
+      <div class="p-col"></div>
+      <div class="p-col"></div>
+      <div class="p-col"></div>
+      <div class="p-col-3">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="assets/img/1.png">
+        <h2>มหาวิทยาลัยราชภัฏสงขลา</h2>
+        <h2>SongKhla Rajabhat University</h2>
+      </div>
+      <div class="p-col"></div>
+      <div class="p-col"></div>
+      <div class="p-col"></div>
     </div>
   </p-card>
-  
   <br>
-  
-<button pButton type="button" label="เข้าสู่ระบบ" icon="pi pi-sign-in" iconPos="right" class="p-button-text p-button-text" routerLink="/login" routerLinkActive="active" ></button>
-
+  <button pButton type="button" label="เข้าสู่ระบบ" icon="pi pi-sign-in" iconPos="right"
+    class="p-button-text p-button-text" routerLink="/login" routerLinkActive="active"></button>
 </ng-container>
 <br>
 <br>
 
-
-
-<!-- The routed views render in the <router-outlet>-->
 <router-outlet></router-outlet>

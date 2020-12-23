@@ -34,7 +34,8 @@ import * as _ from "lodash"
 export class AppComponent  implements OnInit{
   title = 'pjone';
   currentPath: string = ''
-  hideMenu: any = ['/login','/home','/parent','/editparent','class','namecheckinghistory']
+  hideMenu: any = ['/login','/home','/parent','/editparent','class','namecheckinghistory',
+                   '/classdetail']
   
   animals = ['Ant', 'Bat', 'Cat', 'Dog']
 

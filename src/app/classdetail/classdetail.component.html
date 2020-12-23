@@ -1,0 +1,233 @@
+<p-toast></p-toast>
+<p-card>
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="right">
+            <button pButton pRipple type="button" icon="pi pi-home"class="p-button-rounded p-button-success p-button-outlined" (click)="goHome()" ></button>
+        </ng-template>
+        <ng-template pTemplate="left">
+            <h3>ตารางข้อมูลชั้นเรียน {{allClass.className}}</h3> &nbsp;&nbsp;
+            <button pButton pRipple label="เพิ่มนักเรียน" class="p-button-success p-mr-2" (click)="openNewaddstudent()"></button>
+            <button pButton pRipple label="เช็คชื่อมาเรียน" class="p-button-success p-mr-2" ></button>
+            <button pButton pRipple label="เช็คชื่อกลับบ้าน" class="p-button-success p-mr-2" ></button>
+        </ng-template>
+    </p-toolbar>
+<br>
+<p-table [value]="allDataDetailClass" styleClass="p-datatable-striped">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>ลำดับนักเรียน</th>
+            <th>ชื่อนักเรียน</th>
+            <th>นามสกุล</th>
+            <th>ชื่อเล่น</th>
+            <th>เพศ</th>
+            <th>บัญชีผู้ใช้ผู้ปกครอง</th>
+            <th style="text-align:center">สถานะ</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-class>
+        <tr>
+            <td>{{class.studentId}}</td>
+            <td>{{class.studentTitle}}{{class.studentName}}</td>
+            <td>{{class.studentSname }}</td>
+            <td>{{class.studentNickname }}</td>
+            <td>{{class.studentSex }}</td>
+            <td>{{class.parentUser }}</td>
+
+
+            <td style="text-align:center">
+                <button  pButton pRipple type="button"  icon="pi pi-pencil" (click)="onRowEditInit(class)" class="p-button-rounded p-button-text"></button> 
+                <button  pButton pRipple type="button"  icon="pi pi-trash" (click)="saveDeleteStudent(class)" class="p-button-rounded p-button-text  p-button-danger"></button>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+</p-card>
+
+<p-dialog [(visible)]="classDialog"[style]="{width: '450px'}" header="นักเรียนและผู้ปกครอง" [modal]="true"styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-toolbar styleClass="p-mb-4">
+            <ng-template pTemplate="right">
+                <button pButton pRipple label="ผู้ปกครอง" icon="pi pi-sign-in" class="p-button-success p-mr-2" (click)="editParent(allStudent)"></button>
+            </ng-template>
+            <ng-template pTemplate="left">
+                <h3>ข้อมูลนักเรียน</h3>
+            </ng-template>
+        </p-toolbar>
+        <br>
+        <div class="p-grid p-ai-center vertical-container">
+            <div class="p-col">
+                <label for="name">คำนำหน้า</label>
+                <p-dropdown
+                     [options]="titleStudent" [(ngModel)]="allStudent.studentTitle" placeholder="{{allStudent.studentTitle}}">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-field">
+            <label for="name">ชื่อนักเรียน</label>
+            <input type="text" pInputText placeholder="{{allStudent.studentName}}" [(ngModel)]="allStudent.studentName"  required autofocus>
+			<small class="p-invalid" *ngIf="submitted && !allStudent.studentName">ต้องระบุชื่อ</small>
+        </div>
+        <div class="p-field">
+            <label for="name">นามสกุล</label>
+            <input type="text" pInputText placeholder="{{allStudent.studentSname}}" [(ngModel)]="allStudent.studentSname"  required autofocus>
+        </div>
+        <div class="p-field">
+            <label for="name">ชื่อเล่น</label>
+            <input type="text" pInputText placeholder="{{allStudent.studentNickname}}" [(ngModel)]="allStudent.studentNickname"  required autofocus>
+        </div>
+        <div class="p-grid p-ai-center vertical-container">
+            <div class="p-col">
+                <label for="name">เพศ</label>
+                <p-dropdown
+                     [options]="sex" [(ngModel)]="allStudent.studentSex" placeholder="{{allStudent.studentSex}}">
+                </p-dropdown>
+            </div>
+        </div>
+
+    </ng-template> 
+    <ng-template pTemplate="footer">
+		<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+		<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="saveEditStudent()"></button>
+	</ng-template>
+</p-dialog>
+<p-dialog [(visible)]="addStudent"[style]="{width: '450px'}" header="เพิ่มนักเรียน" [modal]="true"styleClass="p-fluid">
+    <p-toolbar styleClass="p-mb-4">
+        <ng-template pTemplate="right">
+            <button pButton pRipple type="button" icon="pi pi-plus"class="p-button-rounded p-button-success p-button-outlined" (click)="addparent()" ></button>
+        </ng-template>
+        <ng-template pTemplate="left">
+            <h3>เพิ่มผู้ปกครอง</h3>
+        </ng-template>
+    </p-toolbar>
+    <ng-template pTemplate="content">
+        <div class="p-grid p-ai-center vertical-container">
+            <div class="p-col">
+                <label for="name">คำนำหน้า</label>
+                <p-dropdown
+                     [options]="titleStudent" [(ngModel)]="allDataDetailClass.studentTitle">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-field">
+            <label for="name">ชื่อนักเรียน</label>
+            <input type="text" pInputText placeholder="{{allDataDetailClass.studentName}}" [(ngModel)]="allDataDetailClass.studentName"  required autofocus>
+			<small class="p-invalid" *ngIf="addStudent && !allDataDetailClass.studentName">ต้องระบุชื่อ</small>
+        </div>
+        <div class="p-field">
+            <label for="name">นามสกุล</label>
+            <input type="text" pInputText placeholder="{{allDataDetailClass.studentSname}}" [(ngModel)]="allDataDetailClass.studentSname"  required autofocus>
+        </div>
+        <div class="p-field">
+            <label for="name">ชื่อเล่น</label>
+            <input type="text" pInputText placeholder="{{allDataDetailClass.studentNickname}}" [(ngModel)]="allDataDetailClass.studentNickname"  required autofocus>
+        </div>
+        <div class="p-grid p-ai-center vertical-container">
+            <div class="p-col">
+                <label for="name">เพศ</label>
+                <p-dropdown
+                     [options]="sex" [(ngModel)]="allDataDetailClass.studentSex" placeholder="{{allDataDetailClass.studentSex}}">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-grid p-ai-center vertical-container">
+            <div class="p-col">
+                <label for="name">เลือกผู้ปกครอง</label>
+                <p-dropdown [options]="allSeleteParent" [(ngModel)]="selectParent" ></p-dropdown>
+            </div>
+        </div>
+    </ng-template> 
+    <ng-template pTemplate="footer">
+		<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+		<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="addStudentInClass()"></button>
+	</ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="parentDialog"[style]="{width: '450px'}" header="นักเรียนและผู้ปกครอง" [modal]="true"styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <p-toolbar styleClass="p-mb-4">
+            <ng-template pTemplate="right">
+                <button pButton pRipple label="นักเรียน" icon="pi pi-sign-out" class="p-button-success p-mr-2" (click)="backToStudent()"></button>
+            </ng-template>
+            <ng-template pTemplate="left">
+                <h3>ผู้ปกครอง</h3>
+            </ng-template>
+        </p-toolbar>
+        <br>
+        <div class="p-grid p-ai-center vertical-container">
+            <div class="p-col">
+                <label for="name">คำนำหน้า</label>
+                <p-dropdown
+                     [options]="titleParent" [(ngModel)]="allParent.parentTitle" placeholder="{{allParent.parentTitle}}">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-field">
+            <label for="name">ชื่อผู้ปกครอง</label>
+            <input type="text" pInputText placeholder="{{allParent.parentName}}" [(ngModel)]="allParent.parentName"  required autofocus>
+			<small class="p-invalid" *ngIf="submitted && !allParent.parentName">ต้องระบุชื่อ</small>
+        </div>
+        <div class="p-field">
+            <label for="name">นามสกุล</label>
+            <input type="text" pInputText placeholder="{{allParent.parentSname}}" [(ngModel)]="allParent.parentSname"  required autofocus>
+        </div>
+        <div class="p-field">
+            <label for="name">เบอร์โทร</label>
+            <input type="text" pInputText placeholder="{{allParent.parentTel}}" [(ngModel)]="allParent.parentTel"  required autofocus>
+        </div>
+        <div class="p-field">
+            <label for="name">ที่อยู่</label>
+            <input type="text" pInputText placeholder="{{allParent.parentAddress}}" [(ngModel)]="allParent.parentAddress"  required autofocus>
+        </div>
+    </ng-template> 
+    <ng-template pTemplate="footer">
+		<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+		<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="saveEditParent()"></button>
+	</ng-template>
+</p-dialog>
+
+<p-dialog [(visible)]="addParent"[style]="{width: '450px'}" header="เพิ่มผู้ปกครอง" [modal]="true"styleClass="p-fluid">
+    <ng-template pTemplate="content">
+        <br>
+        <div class="p-field">
+            <label for="name">บัญชีผู้ใช้ผู้ปกครอง</label>
+            <input type="text" pInputText placeholder="{{allDataDetailClass.parentUser}}" [(ngModel)]="allDataDetailClass.parentUser"  required autofocus>
+			<small class="p-invalid" *ngIf="addParent && !allDataDetailClass.parentUser">ต้องระบุบัญชีผู้ใช้</small>
+        </div>
+        <div class="p-field">
+            <label for="name">รหัสผ่าน</label>
+            <input type="password" pInputText placeholder="{{allDataDetailClass.parentPassword}}" [(ngModel)]="allDataDetailClass.parentPassword"  required autofocus>
+			<small class="p-invalid" *ngIf="addParent && !allDataDetailClass.parentPassword">ต้องระบุรหัสผ่าน</small>
+        </div>
+        <div class="p-grid p-ai-center vertical-container">
+            <div class="p-col">
+                <label for="name">คำนำหน้า</label>
+                <p-dropdown
+                     [options]="titleParent" [(ngModel)]="allDataDetailClass.parentTitle">
+                </p-dropdown>
+            </div>
+        </div>
+        <div class="p-field">
+            <label for="name">ชื่อผู้ปกครอง</label>
+            <input type="text" pInputText placeholder="{{allDataDetailClass.parentName}}" [(ngModel)]="allDataDetailClass.parentName"  required autofocus>
+			<small class="p-invalid" *ngIf="addParent && !allDataDetailClass.parentName">ต้องระบุชื่อ</small>
+        </div>
+        <div class="p-field">
+            <label for="name">นามสกุล</label>
+            <input type="text" pInputText placeholder="{{allDataDetailClass.parentSname}}" [(ngModel)]="allDataDetailClass.parentSname"  required autofocus>
+        </div>
+        <div class="p-field">
+            <label for="name">โทรศัพท์</label>
+            <input type="text" pInputText placeholder="{{allDataDetailClass.parentTel}}" [(ngModel)]="allDataDetailClass.parentTel"  required autofocus>
+        </div>
+        <div class="p-field">
+            <label for="name">ที่อยู่</label>
+            <input type="text" pInputText placeholder="{{allDataDetailClass.parentAddress}}" [(ngModel)]="allDataDetailClass.parentAddress"  required autofocus>
+        </div>
+    </ng-template> 
+    <ng-template pTemplate="footer">
+		<button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text p-button-danger" (click)="hideDialog()"></button>
+		<button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text p-button-success" (click)="addParentInClass()"></button>
+	</ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>

@@ -1,55 +1,39 @@
 <p-card>
-    <form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
-        <div class="p-fluid p-grid">
-            <div class="p-field p-col-12 p-md-4">
-                <!-- <span class="p-float-label">
-                    <input type="text" id="inputtext" pInputText > 
-                    <label for="inputtext">InputText</label>
-                </span> -->
-            </div>
-            <div class="p-field p-col-12 p-md-4">
-                <h3>เข้าสู่ระบบ</h3>
-                <span class="p-float-label">
-                    <input type="text" id="inputtext" pInputText formControlName="username" > 
-                    <label for="inputtext">บัญชีผู้ใช้</label>
-                    
-                </span>
-                <br>
-                <span class="p-float-label">
-                    <input type="password" id="inputtext" pInputText formControlName="password" > 
-                    <label for="inputtext">รหัสผ่าน</label>
-                </span>
-                <br>
-                <div>
-                    <button pButton type="submit" class="p-button-raised p-button-rounded"label="เข้าสู่ระบบ" [disabled]="!userform.valid"></button>
-                    <button pButton type="button" label="สมัครสมาชิก"icon="pi pi-user-plus" iconPos="right" class="p-button-text p-button-text" 
-                    routerLink="/register" routerLinkActive="active"></button>
-
+    <div class="cardBg">
+        <form [formGroup]="userform" (ngSubmit)="onSubmit(userform.value)">
+            <div class="p-fluid p-grid">
+                <div class="p-field p-col-12 p-md-4">
                 </div>
+                <div class="p-field p-col-12 p-md-4">
+                    <h3>เข้าสู่ระบบ</h3>
+                    <span class="p-float-label">
+                        <input type="text" id="inputtext" pInputText formControlName="username">
+                        <label for="inputtext">บัญชีผู้ใช้</label>
+                    </span>
+                    <br>
+                    <span class="p-float-label">
+                        <input type="password" id="inputtext" pInputText formControlName="password">
+                        <label for="inputtext">รหัสผ่าน</label>
+                    </span>
+                    <br>
+                    <div>
+                        <button pButton type="submit" class="p-button-raised p-button-rounded" label="เข้าสู่ระบบ"
+                            [disabled]="!userform.valid"></button>
+                        <button pButton type="button" label="สมัครสมาชิก" icon="pi pi-user-plus" iconPos="right"
+                            class="p-button-text p-button-text" routerLink="/register"
+                            routerLinkActive="active"></button>
+                    </div>
+                </div>
+                <div class="p-field p-col-12 p-md-4"></div>
+                <div class="p-field p-col-12 p-md-4"></div>
+                <div class="p-field p-col-12 p-md-4"></div>
+                <div class="p-field p-col-12 p-md-4"></div>
+                <div class="p-field p-col-12 p-md-4"></div>
+                <div class="p-field p-col-12 p-md-4"></div>
+                <div class="p-field p-col-12 p-md-4"></div>
+                <div class="p-field p-col-12 p-md-4"></div>
             </div>
-            <div class="p-field p-col-12 p-md-4">
-            </div>
-            <div class="p-field p-col-12 p-md-4">
+        </form>
+    </div>
 
-            </div>
-            <div class="p-field p-col-12 p-md-4">
-
-            </div>
-            <div class="p-field p-col-12 p-md-4">
-
-            </div>
-            <div class="p-field p-col-12 p-md-4">
-
-            </div>
-            <div class="p-field p-col-12 p-md-4">
-
-            </div>
-            <div class="p-field p-col-12 p-md-4">
-
-            </div>
-            <div class="p-field p-col-12 p-md-4">
-
-            </div>
-        </div>
-    </form>
 </p-card>

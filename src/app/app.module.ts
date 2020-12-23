@@ -1,45 +1,45 @@
-import { ClassService } from './class.service';
-import { ParentService } from './parent.service';
 import { HttpClientModule } from '@angular/common/http';
-import { ApiService } from './api.service';
-import { LoginComponent } from './login/login.component';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ConfirmationService, MessageService } from 'primeng-lts/api';
+import { AutoCompleteModule } from 'primeng-lts/autocomplete';
+import { ButtonModule } from 'primeng-lts/button';
+import { CalendarModule } from 'primeng-lts/calendar';
+import { CardModule } from 'primeng-lts/card';
+import { ConfirmDialogModule } from 'primeng-lts/confirmdialog';
+import { ContextMenuModule } from 'primeng-lts/contextmenu';
+import { DialogModule } from 'primeng-lts/dialog';
+import { DropdownModule } from 'primeng-lts/dropdown';
+import { FileUploadModule } from 'primeng-lts/fileupload';
+import { InputNumberModule } from 'primeng-lts/inputnumber';
+import { InputTextModule } from 'primeng-lts/inputtext';
+import { InputTextareaModule } from 'primeng-lts/inputtextarea';
+import { MessageModule } from 'primeng-lts/message';
+import { MultiSelectModule } from 'primeng-lts/multiselect';
+import { ProgressBarModule } from 'primeng-lts/progressbar';
+import { RadioButtonModule } from 'primeng-lts/radiobutton';
+import { RatingModule } from 'primeng-lts/rating';
+import { SliderModule } from 'primeng-lts/slider';
+import { TableModule } from 'primeng-lts/table';
+import { TabMenuModule } from 'primeng-lts/tabmenu';
+import { ToastModule } from 'primeng-lts/toast';
+import { ToggleButtonModule } from 'primeng-lts/togglebutton';
+import { ToolbarModule } from 'primeng-lts/toolbar';
+import { ApiService } from './api.service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {ButtonModule} from 'primeng-lts/button';
-import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './register/register.component';
-import {ContextMenuModule} from 'primeng-lts/contextmenu';
-import {CardModule} from 'primeng-lts/card';
-import {AutoCompleteModule} from 'primeng-lts/autocomplete';
-import {InputTextModule} from 'primeng-lts/inputtext';
-import {InputTextareaModule} from 'primeng-lts/inputtextarea';
-import {MessageModule} from 'primeng-lts/message';
-import {FormsModule,ReactiveFormsModule} from '@angular/forms';
-import {TabMenuModule} from 'primeng-lts/tabmenu';
-import {ToggleButtonModule} from 'primeng-lts/togglebutton';
-import {DropdownModule} from 'primeng-lts/dropdown';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ParentComponent } from './parent/parent.component';
-import {TableModule} from 'primeng-lts/table';
-import {ToastModule} from 'primeng-lts/toast';
-import {CalendarModule} from 'primeng-lts/calendar';
-import {SliderModule} from 'primeng-lts/slider';
-import {MultiSelectModule} from 'primeng-lts/multiselect';
-import {DialogModule} from 'primeng-lts/dialog';
-import {ProgressBarModule} from 'primeng-lts/progressbar';
-import {EditparentComponent } from './editparent/editparent.component';
-import {FileUploadModule} from 'primeng-lts/fileupload';
-import {ToolbarModule} from 'primeng-lts/toolbar';
-import {RatingModule} from 'primeng-lts/rating';
-import {RadioButtonModule} from 'primeng-lts/radiobutton';
-import {InputNumberModule} from 'primeng-lts/inputnumber';
-import {ConfirmDialogModule } from 'primeng-lts/confirmdialog';
-import {ConfirmationService} from 'primeng-lts/api';
-import {MessageService } from 'primeng-lts/api';
+import { ClassService } from './class.service';
 import { ClassComponent } from './class/class.component';
+import { ClassdetailComponent } from './classdetail/classdetail.component';
+import { DesignloginComponent } from './designlogin/designlogin.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
 import { NamecheckinghistoryComponent } from './namecheckinghistory/namecheckinghistory.component';
+import { ParentService } from './parent.service';
+import { ParentComponent } from './parent/parent.component';
+import { RegisterComponent } from './register/register.component';
 
 // import { MessageService } from 'primeng-lts/api';
 
@@ -52,9 +52,10 @@ import { NamecheckinghistoryComponent } from './namecheckinghistory/namechecking
     RegisterComponent,
     LoginComponent,
     ParentComponent,
-    EditparentComponent,
     ClassComponent,
-    NamecheckinghistoryComponent
+    NamecheckinghistoryComponent,
+    ClassdetailComponent,
+    DesignloginComponent
   ],
   imports: [
     BrowserModule,
@@ -86,9 +87,6 @@ import { NamecheckinghistoryComponent } from './namecheckinghistory/namechecking
     RadioButtonModule,
     InputNumberModule,
     ConfirmDialogModule
-    
-
-    // MessageService
     
 
     

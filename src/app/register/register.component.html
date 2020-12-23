@@ -1,11 +1,11 @@
 <p-card>
-    <form [formGroup]="UserForm" (ngSubmit)="ConfirmRegister(UserForm.value)" >
+    <form [formGroup]="userForm" (ngSubmit)="ConfirmRegister(userForm.value)" >
         <h2>สมัครสมชิก</h2>
         <div class="p-grid p-flex-column" >
             <div class="p-col">
                 <div class="p-inputgroup">
                     <span class="p-float-label">
-                        <input type="text" pInputText formControlName="teacher_user">
+                        <input type="text" pInputText formControlName="teacherUser">
                         <label for="inputtext">บัญชีผู้ใช้</label>  
                     </span>
                 </div>
@@ -13,20 +13,20 @@
             <div class="p-col">
                 <div class="p-inputgroup">
                     <span class="p-float-label">
-                        <input type="password" pInputText formControlName="teacher_password">
+                        <input type="password" pInputText formControlName="teacherPassword">
                         <label for="inputtext">รหัสผ่าน</label>  
                     </span>
                 </div>
             </div>
             <div class="p-grid p-ai-center vertical-container" >
                 <div class="p-col">
-                   &nbsp; <p-dropdown [options]="title" formControlName="teacher_title" ></p-dropdown>
+                   &nbsp; <p-dropdown [options]="title" formControlName="teacherTitle" ></p-dropdown>
                 </div>
             </div>
             <div class="p-col">
                 <div class="p-inputgroup">
                     <span class="p-float-label">
-                        <input type="text" pInputText formControlName="teacher_name">
+                        <input type="text" pInputText formControlName="teacherName">
                         <label for="inputtext">ชื่อผู้ใช้</label>  
                     </span>
                 </div>
@@ -34,7 +34,7 @@
             <div class="p-col">
                 <div class="p-inputgroup">
                     <span class="p-float-label">
-                        <input type="text" pInputText formControlName="teacher_sname">
+                        <input type="text" pInputText formControlName="teacherSname">
                         <label for="inputtext">นามสกุล</label>  
                     </span>
                 </div>
@@ -42,7 +42,7 @@
             <div class="p-col">
                 <div class="p-inputgroup">
                     <span class="p-float-label">
-                        <input type="text" pInputText formControlName="teacher_address">
+                        <input type="text" pInputText formControlName="teacherAddress">
                         <label for="inputtext">ที่อยู่</label>  
                     </span>
                 </div>
@@ -50,16 +50,15 @@
             <div class="p-col">
                 <div class="p-inputgroup">
                     <span class="p-float-label">
-                        <input type="text" pInputText formControlName="teacher_tel">
+                        <input type="text" pInputText formControlName="teacherTel">
                         <label for="inputtext">เบอร์โทร</label>  
                     </span>
                 </div>
             </div>
         </div>
         <div class="p-col-12 p-md-6">
-            <button pButton pRipple type="submit" label="ยืนยันการสมัคร"[disabled]="!UserForm.valid"  class="p-button-raised p-button-success"
+            <button pButton pRipple type="submit" label="ยืนยันการสมัคร"[disabled]="!userForm.valid"  class="p-button-raised p-button-success"
                 ></button>
         </div>
-
     </form>
 </p-card>

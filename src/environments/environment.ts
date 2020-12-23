@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  Url: "http://localhost/todoslim3/public/index.php/",
+  url: "http://localhost/todoslim3/public/index.php/",
   production: false
 };
 

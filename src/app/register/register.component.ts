@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from './../api.service';
 import { Component, OnInit } from '@angular/core';
-import {Validators,FormControl,FormGroup,FormBuilder} from '@angular/forms';
+import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { SelectItem } from 'primeng-lts/api';
 import { MenuItem } from 'primeng-lts/api';
 
@@ -13,15 +13,15 @@ import { MenuItem } from 'primeng-lts/api';
 export class RegisterComponent implements OnInit {
 
 
-  title:any[];
-  UserForm: FormGroup;
+  title: any[];
+  userForm: FormGroup;
   submitted: boolean;
-  Items: SelectItem[];
+  itemSelect: SelectItem[];
   items: MenuItem[];
   activeItem: MenuItem;
 
-  constructor(private fb: FormBuilder,private api:ApiService,private router: Router,private activate: ActivatedRoute) { 
-    this.Items = [];
+  constructor(private fb: FormBuilder, private api: ApiService, private router: Router, private activate: ActivatedRoute) {
+    this.itemSelect = [];
 
     this.title = [
       { label: 'คำนำหน้า', value: 'คำนำหน้า' },
@@ -33,42 +33,35 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
 
-        this.UserForm = this.fb.group({
-          'teacher_user': new FormControl('', Validators.required),
-          'teacher_password': new FormControl('', Validators.required),
-          'teacher_title': new FormControl('', Validators.required),
-          'teacher_name': new FormControl('', Validators.required),
-          'teacher_sname': new FormControl('', Validators.required),
-          'teacher_tel': new FormControl('', Validators.required),
-          'teacher_address': new FormControl('', Validators.required)
-        });
+    this.userForm = this.fb.group({
+      'teacherUser': new FormControl('', Validators.required),
+      'teacherPassword': new FormControl('', Validators.required),
+      'teacherTitle': new FormControl('', Validators.required),
+      'teacherName': new FormControl('', Validators.required),
+      'teacherSname': new FormControl('', Validators.required),
+      'teacherTel': new FormControl('', Validators.required),
+      'teacherAddress': new FormControl('', Validators.required)
+    });
   }
 
+  ConfirmRegister(value: string) {
 
-  ConfirmRegister(value: string){
-    console.log(value);
-    
-    let SetData  = JSON.stringify({
-      teacher_user: value['teacher_user'],
-      teacher_password: value['teacher_password'],
-      teacher_title: value['teacher_title'],
-      teacher_name: value['teacher_name'],
-      teacher_sname: value['teacher_sname'],
-      teacher_address: value['teacher_address'],
-      teacher_tel: value['teacher_tel']
-      
+    let SetData = JSON.stringify({
+      teacher_user: value['teacherUser'],
+      teacher_password: value['teacherPassword'],
+      teacher_title: value['teacherTitle'],
+      teacher_name: value['teacherName'],
+      teacher_sname: value['teacherSname'],
+      teacher_address: value['teacherAddress'],
+      teacher_tel: value['teacherTel']
+
     })
     let datapost = JSON.parse(SetData);
-    
-    console.log(datapost);
-    
-    this.api.RegisterTeacher(datapost).subscribe((DataRegister:any)=>{
-      console.log(DataRegister);
-      
+    this.api.registerTeacher(datapost).subscribe((DataRegister: any) => {
+
       
     })
     this.router.navigate(['/login']);
-
   }
 
 }

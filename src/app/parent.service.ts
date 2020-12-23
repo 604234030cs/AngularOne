@@ -13,25 +13,39 @@ export class ParentService {
 
 
   getDataParent(teacher_id){
-    environment
-    let Url = environment.Url+'allparent/'+teacher_id;
-    return this.http.get(Url);
+    
+    let url = environment.url+'allparent/'+teacher_id;
+    return this.http.get(url);
   }
-  getCheckDataParent(par_id){
-    environment
-    let Url = environment.Url+'checkparentparid/'+par_id;
-    return this.http.get(Url);
+  getCheckDataParent(parentId){
+    
+    let url = environment.url+'checkparentparid/'+parentId;
+    return this.http.get(url);
   }
-  getDeleteDataParent(par_id){
-    environment
-    let Url = environment.Url+'deletepar/'+par_id;
-    return this.http.get(Url);
+  getCheckDataParentId(parentId){
+    
+    let url = environment.url+'checkparentparid/'+parentId;
+    return this.http.get(url);
+  }
+  getCheckDataParentUser(parentUser){
+    
+    let url = environment.url+'checkparentuser/'+parentUser;
+    return this.http.get(url);
+  }
+  getDeleteDataParent(ParentId){
+    
+    let url = environment.url+'deletepar/'+ParentId;
+    return this.http.get(url);
+  }
+  addDataParent(data){
+    
+    let url = environment.url+'registerparent2';
+    return this.http.post(url,data);
   }
   editDataParent(parent){
 
-    // environment
-    let Url = environment.Url+'editparent2/'+parent[0].par_id+'&&'+parent[0].par_user+'&&'+parent[0].par_title+'&&'+parent[0].par_name
-    +'&&'+parent[0].par_sname+'&&'+parent[0].par_tel+'&&'+parent[0].par_address;
-    return this.http.get(Url);
+    let url = environment.url+'editparent2/'+parent.parentId+'&&'+parent.parentUser+'&&'+parent.parentTitle+'&&'+parent.parentName
+    +'&&'+parent.parentSname+'&&'+parent.parentTel+'&&'+parent.parentAddress;
+    return this.http.get(url);
   }
 }

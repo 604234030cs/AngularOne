@@ -1,0 +1,50 @@
+div.relative1{
+    position: absolute;
+    border: 0px solid;
+    top: 30px;
+
+    width: 1370px;
+
+  }
+  div.relative2{
+    position: relative;
+    border: 0px solid;
+    top: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  div.relative3{
+    position: relative;
+    border: 0px solid;
+    top: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .img{
+      width: 1300px;
+  }
+  .center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .imgicon{
+    width: 100px;
+    height: 100px;
+  }
+  .settingcardinput{
+    opacity: 0.7;
+    width: 400px;
+    
+  }
+  .settingforminput{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* opacity: 0.9; */
+  }
+  /* :host ::ng-deep .p-card .p-card-body{
+    background-color: rgb(212, 204, 154) !important;
+} */

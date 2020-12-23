@@ -13,7 +13,7 @@ export class NamecheckinghistoryComponent implements OnInit {
 
 
 
-  Items: SelectItem[];
+  itemSelect: SelectItem[];
   items: MenuItem[];
   activeItem: MenuItem;
   allDate: any = [];
@@ -30,7 +30,7 @@ export class NamecheckinghistoryComponent implements OnInit {
   ngOnInit(): void {
 
     this.items = [
-      { label: '', icon: 'pi pi-fw pi-home' },
+      { label: '', icon: 'pi pi-fw pi-home',routerLink:"/home"},
       { label: 'ข้อมูลผู้ปกครอง', icon: 'pi pi-fw pi-user', routerLink: "/parent" },
       { label: 'ข้อมูลชั้นเรียน', icon: 'pi pi-fw pi-file', routerLink: "/class" },
       { label: 'ประวัติการเช็ค', icon: 'pi pi-fw pi-file', routerLink: "/namecheckinghistory" }
@@ -51,11 +51,9 @@ export class NamecheckinghistoryComponent implements OnInit {
             label: it.check_data, value: it.check_data
           }
         })];
-        // if(this.allDate.length >0){
-        //   this.selectDate = this.allDate[0].value
-        // }
     })
   }
+
   loadDataClass() {
     let dataTeacher = JSON.parse(localStorage.getItem('user'))
     this.apihistorycheckname.getclass(dataTeacher.teacher_id).subscribe((dataClass: any) => {
@@ -69,16 +67,12 @@ export class NamecheckinghistoryComponent implements OnInit {
           }
         })
       ]
-
     })
   }
+
   listCheckName() {
-    console.log(this.selectDate);
-    console.log(this.selectClass);
     this.apihistorycheckname.getListCheckName(this.selectDate,this.selectClass).subscribe((dataListCheckName:any)=>{
       this.allListCheckName = dataListCheckName;
-      console.log(this.allListCheckName);
-
     })
   }
 

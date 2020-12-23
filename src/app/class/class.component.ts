@@ -23,14 +23,16 @@ import { MessageService } from "primeng-lts/api";
 })
 export class ClassComponent implements OnInit {
 
-  Items: SelectItem[];
+  itemsSelect: SelectItem[];
   items: MenuItem[];
   activeItem: MenuItem;
-  allClass:any=[];
-  checkclass:any=[];
   classDialog: boolean;
   submitted: boolean;
   class: any;
+  allClass:any=[];
+  checkClass:any=[];
+  selectedProducts2:any;
+  selectedProduct: any;
 
 
   constructor(private router: Router,private apiClass: ClassService,private messageService: MessageService,private confirmationService: ConfirmationService) { 
@@ -40,7 +42,7 @@ export class ClassComponent implements OnInit {
   ngOnInit(): void {
 
     this.items = [
-      { label: '', icon: 'pi pi-fw pi-home' },
+      { label: '', icon: 'pi pi-fw pi-home',routerLink:"/home" },
       { label: 'ข้อมูลผู้ปกครอง', icon: 'pi pi-fw pi-user',routerLink:"/parent" },
       { label: 'ข้อมูลชั้นเรียน', icon: 'pi pi-fw pi-file',routerLink:"/class" },
       { label: 'ประวัติการเช็ค', icon: 'pi pi-fw pi-file',routerLink:"/namecheckinghistory" }
@@ -48,50 +50,53 @@ export class ClassComponent implements OnInit {
     ];
     this.activeItem = this.items[2];
   }
+
   loadDataClass(){
+
     let dataTeacher = JSON.parse(localStorage.getItem('user'));
-    this.apiClass.getDataClass(dataTeacher.teacher_id).subscribe((data:any)=>{
-      this.allClass = data;
-      console.log(this.allClass);
+    this.apiClass.getDataClass(dataTeacher.teacherId).subscribe((data:any)=>{
+      this.allClass = data.map(it=>{
+        return {
+          classId: it.class_id ,className:it.class_name,teacherId:it.teacher_id
+        }
+      })
     });
   }
 
   onRowEditInit(parent: any){
-    let id = parent.class_id;
-    this.apiClass.getDataClassId(id).subscribe((datacheckclass:any)=>{
-      this.checkclass = datacheckclass;
+
+    let id = parent.classId;
+    this.apiClass.getDataClassId(id).subscribe((data:any)=>{
+      console.log(data);
+      this.checkClass = data.map(it=>{
+        return{
+          classId: it.class_id ,className:it.class_name,teacherId:it.teacher_id
+        }
+      })
       this.classDialog = true;
     })
   }
 
   saveEditClass(){
-    
-    console.log("ปุ่มแก้ไข");
-
-    console.log(this.checkclass[0].class_name);
-    
-    this.apiClass.editDataClassId(this.checkclass).subscribe((dataEditingClass:any)=>{
-      console.log(dataEditingClass);
+      
+    this.apiClass.editDataClassId(this.checkClass).subscribe((dataEditingClass:any)=>{
       this.classDialog = false;
       this.messageService.add({severity:'success',summary:'เสร็จสิ้น',detail:'แก้ไขข้อมูลชั้นเรียนสำเร็จ',life:3000})
       this.loadDataClass();
-      
     })
   }
 
-  saveDeleteParent(parent: any){
-   
-    console.log("ปุ่มลบ"); 
-    console.log(parent.class_id);
-    let id = parent.class_id;
+  saveDeleteClass(parent: any){
+
+    let id = parent.classId;
     this.apiClass.getDataClassId(id).subscribe((dataCheckClass:any)=>{
-      this.checkclass = dataCheckClass;
+      this.checkClass = {classId:dataCheckClass[0].class_id,className:dataCheckClass[0].class_name,teacherId:dataCheckClass[0].teacher_id}
       this.confirmationService.confirm({
-        message: 'คุณต้องการลบชั้นเรียน '+this.checkclass[0].class_name + ' ? ',
+        message: 'คุณต้องการลบชั้นเรียน '+this.checkClass.className + ' ? ',
         header: 'ยืนยัน',
         icon: 'pi pi-question',
         accept: ()=>{
-          this.apiClass.deleteDataClassId(this.checkclass[0].class_id).subscribe((dataDeleteClass:any)=>{
+          this.apiClass.deleteDataClassId(this.checkClass.classId).subscribe((dataDeleteClass:any)=>{
             if(dataDeleteClass == 'Success'){
               console.log("สำเร็จ");
               this.messageService.add({severity:'success', summary: 'เสร็จสิ้น', detail: 'ลบข้อมูลชั้นเรียนสำเร็จ', life: 3000});
@@ -104,34 +109,32 @@ export class ClassComponent implements OnInit {
         }
       })
     })
-
   }
+
   hideDialog(){
 
     this.classDialog = false;  
     this.submitted = false;
     
   }
+
   openNew(){
     
-    this.checkclass =[{}];
+    this.checkClass =[{}];
     this.submitted = true;
    
   }
+
   saveAddClass(){
-    console.log("ปุ่มเพิ่ม");
-    console.log(this.checkclass[0].class_name);
 
     let dataTeacher = JSON.parse(localStorage.getItem('user'));
     let setData = JSON.stringify({
-      class_name:this.checkclass[0].class_name,
-      teacher_id:dataTeacher.teacher_id
+      class_name:this.checkClass[0].className,
+      teacher_id:dataTeacher.teacherId
     })
     let dataPost = JSON.parse(setData);
-    this.apiClass.getDataClassName(this.checkclass[0].class_name,dataTeacher.teacher_id).subscribe((dataCheckClass)=>{
-      console.log(dataCheckClass);
-      if(dataCheckClass == false){
-        
+    this.apiClass.getDataClassName(this.checkClass[0].className,dataTeacher.teacherId).subscribe((dataCheckClass)=>{
+      if(dataCheckClass == false){      
         this.confirmationService.confirm({
           message: 'คุณต้องการเพิ่มข้อมูลชั้นเรียน',
           header: 'ยืนยัน',
@@ -145,7 +148,6 @@ export class ClassComponent implements OnInit {
               }else{
                 this.messageService.add({severity:'success', summary: 'เสร็จสิ้น', detail: 'เพิ่มข้อมูลชั้นเรียนไม่สำเร็จ', life: 3000});
                 this.submitted = false;
-
               }
             })
           }
@@ -155,5 +157,21 @@ export class ClassComponent implements OnInit {
         this.submitted = false;
       }
     })
+
+  }
+
+  onRowSelect(event) {
+
+    let keyClass = { 
+        classId:event.data.classId,
+        className:event.data.className
+      }
+    localStorage.setItem('keyClass',JSON.stringify(keyClass));
+      this.router.navigate(['/classDetail'])
+    this.messageService.add({severity:'info', summary:'Product Selected', detail: event.data.name});
+  }
+  
+  onRowUnselect(event) {
+    this.messageService.add({severity:'info', summary:'Product Unselected',  detail: event.data.name});
   }
 }

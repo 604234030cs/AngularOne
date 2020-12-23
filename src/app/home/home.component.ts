@@ -15,24 +15,22 @@ import { SelectItem } from 'primeng-lts/api';
 })
 export class HomeComponent implements OnInit {
 
-  title: any[];
-  selectedCity1;
   public list = [];
   public listdate = [];
-  Items: SelectItem[];
+  tiTle: any[];
+  teacher: any = [];
+  itemSelec: SelectItem[];
   items: MenuItem[];
   activeItem: MenuItem;
-  teacher: any = [];
-
   isEdit: boolean;
-
+  selectedCity1;
 
   constructor(private api: ApiService, private router: Router) {
     this.isEdit = true
-    this.Items = [];
-    this.loaddata();
+    this.itemSelec = [];
+    this.loadData();
 
-    this.title = [
+    this.tiTle = [
       { label: 'นางสาว', value: 'นางสาว' },
       { label: 'นาง', value: 'นาง' },
       { label: 'นาย', value: 'นาย' }
@@ -41,48 +39,41 @@ export class HomeComponent implements OnInit {
   }
 
 
-  loaddata(){
+  loadData(){
     let teacher = JSON.parse(localStorage.getItem('user'));
-    console.log(teacher);
-    this.api.getteacher(teacher.teacher_user, teacher.teacher_password).subscribe((dataTeacher: any) => {
-      console.log(dataTeacher);
-      this.teacher = dataTeacher;
-
+    this.api.getTeacher(teacher.teacherUser, teacher.teacherPassword).subscribe((data: any) => {
+      this.teacher = {
+        teacherId:data.teacher_id,teacherUser:data.teacher_user,teacherPassword:data.teacher_password,teacherTitle:data.teacher_title,
+        teacherName:data.teacher_name,teacherSname:data.teacher_sname,teacherAddress:data.teacher_address,teacherTel:data.teacher_tel,
+        teacherLatitude:data.teacher_latitude,teacherLongitude:data.teacher_longitude
+    }
     })
   }
 
   ngOnInit(): void {
-
-    this.list = this.api.getlist();
-
+    this.list = this.api.getList();
     this.items = [
       { label: '', icon: 'pi pi-fw pi-home' },
       { label: 'ข้อมูลผู้ปกครอง', icon: 'pi pi-fw pi-user',routerLink:"/parent" },
       { label: 'ข้อมูลชั้นเรียน', icon: 'pi pi-fw pi-file',routerLink:"/class" },
       { label: 'ประวัติการเช็ค', icon: 'pi pi-fw pi-file',routerLink:"/namecheckinghistory" }
-
     ];
     this.activeItem = this.items[0];
   }
 
-  logout() {
+  logOut() {
     localStorage.removeItem('user')
     this.router.navigate(['/'])
   }
 
-  confirmEdit() {
-
-    let Teacher_Title = this.teacher.teacher_title;
-    console.log(Teacher_Title);
-
-    this.api.UpdateDataTeacher(this.teacher.teacher_id, Teacher_Title, this.teacher.teacher_name, this.teacher.teacher_sname,
-      this.teacher.teacher_address, this.teacher.teacher_tel).subscribe((DataUpdateTeacher: any) => {
+  conFirmEdit() {
+    this.api.upDateDataTeacher(this.teacher.teacherId, this.teacher.teacherTitle, this.teacher.teacherName, this.teacher.teacherSname,
+      this.teacher.teacherAddress, this.teacher.teacherTel).subscribe((DataUpdateTeacher: any) => {
         this.teacher = DataUpdateTeacher;
+        this.loadData();
         this.isEdit = true;
-      })
-    // let url = environment.Url +'/editteacher'+this.teacher.teacher_id+'&&'+this.teacher.teacher_title+'&&'+this.teacher.teacher_name
-    // +'&&'+this.teacher.teacher_sname+'&&'+this.teacher.teacher_address+'&&'+this.teacher.teacher_tel;
 
+      })
   }
 
 

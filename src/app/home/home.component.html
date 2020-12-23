@@ -1,13 +1,8 @@
-<!-- <p>home works!</p>
-<h2>list name</h2>
-<ul *ngFor="let item of list">
-    <li>{{item.name}}</li>
-</ul>
-{{listdate.ck_date}} -->
+
 <div class="p-grid">
     <div class="p-col"></div>
     <div class="p-col-1">
-        <button pButton pRipple type="button" icon="pi pi-power-off"class="p-button-rounded p-button-danger p-button-outlined" (click)="logout()"></button>
+        <button pButton pRipple type="button" icon="pi pi-power-off"class="p-button-rounded p-button-danger p-button-outlined" (click)="logOut()"></button>
     </div>
 </div>
 <p-tabMenu [model]="items" [activeItem]="activeItem"></p-tabMenu>
@@ -21,7 +16,7 @@
     <div class="p-grid p-flex-column" *ngIf="isEdit">
         <br>
         <div class="p-col">
-            <div class="box"><b>บัญชีผู้ใช้</b>{{teacher.teacher_user}}</div>
+            <div class="box"><b>บัญชีผู้ใช้</b>{{teacher.teacherUser}}</div>
         </div>
     </div>    
     <div class="p-grid p-ai-center vertical-container" *ngIf="isEdit">
@@ -29,57 +24,55 @@
         <div class="p-col">
             <br>
             <div class="box"><b>ชื่อผู้ใช้:
-                </b>{{teacher.teacher_title}}{{teacher.teacher_name}}&nbsp;&nbsp;{{teacher.teacher_sname}}
+                </b>{{teacher.teacherTitle}}{{teacher.teacherName}}&nbsp;&nbsp;{{teacher.teacherSname}}
             </div>
         </div>
         <div class="p-col">
-            <div class="box"><b>เบอร์โทร: </b>{{teacher.teacher_tel}} </div>
+            <div class="box"><b>เบอร์โทร: </b>{{teacher.teacherTel}} </div>
         </div>
     </div>
     <div class="p-grid p-flex-column" *ngIf="isEdit">
         <br>
         <div class="p-col">
-            <div class="box"><b>ที่อยู่:</b> {{teacher.teacher_address}}</div>
+            <div class="box"><b>ที่อยู่:</b> {{teacher.teacherAddress}}</div>
         </div>
     </div>
     <div class="p-grid p-ai-center vertical-container" *ngIf="!isEdit">
         <div class="p-col">
             <p-dropdown
-                 [options]="title" [(ngModel)]="teacher.teacher_title" placeholder="{{teacher.teacher_title}}">
+                 [options]="tiTle" [(ngModel)]="teacher.teacherTitle" placeholder="{{teacher.teacherTitle}}">
             </p-dropdown>
         </div>
     </div>
     <div class="p-grid p-fluid" *ngIf="!isEdit">
         <div class="p-col-12 p-md-4">
             <div class="p-inputgroup">
-                <input type="text" pInputText placeholder="{{teacher.teacher_name}}" [(ngModel)]="teacher.teacher_name">
+                <input type="text" pInputText placeholder="{{teacher.teacherName}}" [(ngModel)]="teacher.teacherName">
             </div>
         </div>
-
         <div class="p-col-12 p-md-4">
             <div class="p-inputgroup">
-                <input type="text" pInputText placeholder="{{teacher.teacher_sname}}"[(ngModel)]="teacher.teacher_sname">
+                <input type="text" pInputText placeholder="{{teacher.teacherSname}}"[(ngModel)]="teacher.teacherSname">
             </div>
         </div>
     </div>
     <div class="p-grid p-ai-center vertical-container" *ngIf="!isEdit">
         <div class="p-col">
-            <input id="disabled-input" type="text" pInputText="{{teacher.teacher_tel}}"
-                [(ngModel)]="teacher.teacher_tel" />
+            <input id="disabled-input" type="text" pInputText="{{teacher.teacherTel}}"
+                [(ngModel)]="teacher.teacherTel" />
         </div>
     </div>
     <div class="p-grid p-flex-column" *ngIf="!isEdit">
         <div class="p-col">
             <div class="p-inputgroup">
-                <input type="text" pInputText placeholder="{{teacher.teacher_address}}"[(ngModel)]="teacher.teacher_address">
+                <input type="text" pInputText placeholder="{{teacher.teacherAddress}}"[(ngModel)]="teacher.teacherAddress">
             </div>
         </div>
     </div>
     <div class="p-grid p-fluid" *ngIf="!isEdit">
-
         <div class="p-col-12 p-md-4"></div>
         <div class="p-col-12 p-md-4">
-            <button pButton pRipple type="button" label="ยืนยันการแก้ไข" class="p-button-raised p-button-success"(click)="confirmEdit()"></button>
+            <button pButton pRipple type="button" label="ยืนยันการแก้ไข" class="p-button-raised p-button-success"(click)="conFirmEdit()"></button>
         </div>
         <div class="p-col-12 p-md-4"></div>
     </div>
