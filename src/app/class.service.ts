@@ -8,16 +8,64 @@ import { map } from 'rxjs/operators'
 })
 export class ClassService {
 
-  class:any=[];
+  class: any = [];
 
   constructor(private http: HttpClient) {
 
   }
   getDataDetailClas(allClass) {
     console.log(allClass.classId);
-
     let url = environment.url + 'parentandstudent/' + allClass.classId
-    return this.http.get(url)
+    return this.http.get(url).pipe(map((data: any) => {
+      return data.map(it => {
+        console.log(it);
+        return {
+          classId: it.class_id,
+          latitude: it.latitude,
+          longtitude: it.longitude,
+          parentAddress: it.par_address,
+          parentId: it.par_id,
+          parentName: it.par_name,
+          parentPassword: it.par_password,
+          parentSname: it.par_sname,
+          parentTel: it.par_tel,
+          parentTitle: it.par_title,
+          parentUser: it.par_user,
+          studentId: it.st_id,
+          studentName: it.student_name,
+          studentNickname: it.student_nickname,
+          studentSex: it.student_sex,
+          studentSname: it.student_sname,
+          studentTitle: it.student_title,
+          teacherId: it.teacher_id
+        }
+      })
+    }))
+    // .pipe(map((data: any) => {
+    //   console.log(data);
+    //    [...data.map(it => {
+    //     return {
+    //       classId: it[0].class_id,
+    //       latitude: it[0].latitude,
+    //       longtitude: it[0].longtitude,
+    //       parentAddress: it[0].par_address,
+    //       parentId: it[0].par_id,
+    //       parentName: it[0].par_name,
+    //       parentPassword: it[0].par_password,
+    //       parentSname: it[0].par_sname,
+    //       parentTel: it[0].par_tel,
+    //       parentTitle: it[0].par_title,
+    //       parentUser: it[0].par_user,
+    //       studentId: it[0].st_id,
+    //       studentName: it[0].student_name,
+    //       studentNickname: it[0].student_nickname,
+    //       studentSex: it[0].student_sex,
+    //       studentSname: it[0].student_sname,
+    //       studentTitle: it[0].student_title,
+    //       teacherId: it[0].teacher_id
+    //     }
+    //   })]
+    // }));
   }
   getDataStudentId(studentId) {
     console.log(studentId);
@@ -33,10 +81,12 @@ export class ClassService {
   getDataClassId(classId) {
 
     let url = environment.url + 'classid/' + classId;
-    return this.http.get(url);
-  
-    
-    // return this.http.get(url).pipe(map((result:any)=>{result.class_id,result.class_name,result.teacher_id}),);
+    return this.http.get(url).pipe(map((result: any) => {
+      console.log(result);
+
+      return { classId: result[0].class_id, className: result[0].class_name, teacherId: result[0].teacher_id }
+    }));
+
   }
   getDataClassName(className, teacherId) {
 
@@ -48,14 +98,13 @@ export class ClassService {
     return this.http.post(url, dataPost);
   }
   addDataStudent(data) {
-    console.log(data);
     let url = environment.url + 'addstudent2';
     return this.http.post(url, data);
   }
   editDataClassId(data) {
     console.log(data);
 
-    let url = environment.url + 'saveeditclass/' + data[0].classId + '&&' + data[0].className
+    let url = environment.url + 'saveeditclass/' + data.classId + '&&' + data.className
     return this.http.get(url);
   }
   editDataStudent(student) {

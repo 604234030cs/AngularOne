@@ -69,13 +69,15 @@ export class ClassdetailComponent implements OnInit {
   loadDataClassDetail(){
     
     this.apiClass.getDataDetailClas(this.allClass).subscribe((data:any)=>{
-      this.allDataDetailClass = data.map(it=>{
-        return {
-          classId:it.class_id,latitude:it.latitude,longtitude:it.longtitude,parentAddress:it.par_address,parentId:it.par_id,parentName:it.par_name,parentPassword:it.par_password,
-          parentSname:it.par_sname,parentTel:it.par_tel,parentTitle:it.par_title,parentUser:it.par_user,studentId:it.st_id,studentName:it.student_name,studentNickname:it.student_nickname,
-          studentSex:it.student_sex,studentSname:it.student_sname,studentTitle:it.student_title,teacherId:it.teacher_id
-        }
-      })   
+      console.log(data);
+      this.allDataDetailClass = data;
+      // .map(it=>{
+      //   return {
+      //     classId:it.classId,latitude:it.latitude,longtitude:it.longtitude,parentAddress:it.par_address,parentId:it.par_id,parentName:it.par_name,parentPassword:it.par_password,
+      //     parentSname:it.par_sname,parentTel:it.par_tel,parentTitle:it.par_title,parentUser:it.par_user,studentId:it.st_id,studentName:it.student_name,studentNickname:it.student_nickname,
+      //     studentSex:it.student_sex,studentSname:it.student_sname,studentTitle:it.student_title,teacherId:it.teacher_id
+      //   }
+      // })   
     })
   }
 

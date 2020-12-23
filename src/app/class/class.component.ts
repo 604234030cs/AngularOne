@@ -67,12 +67,14 @@ export class ClassComponent implements OnInit {
 
     let id = parent.classId;
     this.apiClass.getDataClassId(id).subscribe((data:any)=>{
-      console.log(data);
-      this.checkClass = data.map(it=>{
-        return{
-          classId: it.class_id ,className:it.class_name,teacherId:it.teacher_id
-        }
-      })
+
+      this.checkClass = data;
+      console.log(this.checkClass);
+      // this.checkClass = data.map(it=>{
+      //   return{
+      //     classId: it.class_id ,className:it.class_name,teacherId:it.teacher_id
+      //   }
+      // })
       this.classDialog = true;
     })
   }
@@ -90,7 +92,8 @@ export class ClassComponent implements OnInit {
 
     let id = parent.classId;
     this.apiClass.getDataClassId(id).subscribe((dataCheckClass:any)=>{
-      this.checkClass = {classId:dataCheckClass[0].class_id,className:dataCheckClass[0].class_name,teacherId:dataCheckClass[0].teacher_id}
+      this.checkClass = dataCheckClass;
+      // {classId:dataCheckClass[0].class_id,className:dataCheckClass[0].class_name,teacherId:dataCheckClass[0].teacher_id}
       this.confirmationService.confirm({
         message: 'คุณต้องการลบชั้นเรียน '+this.checkClass.className + ' ? ',
         header: 'ยืนยัน',
